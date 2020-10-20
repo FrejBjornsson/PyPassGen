@@ -1,5 +1,5 @@
 # PyPassGen
-Password Generator built with Python
+Password Generator built written in Python
 
 <p>
 <a href="https://github.com/FrejBjornsson/PyPassGen" target="_blank">
