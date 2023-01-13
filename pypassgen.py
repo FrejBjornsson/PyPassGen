@@ -1,32 +1,46 @@
 # importing Libraries
-from tkinter import *
 import random
 import string
-from tkinter import Tk
 import pyperclip
+from tkinter import *
+
+import customtkinter
+from customtkinter import *
+
+
+# Set theme of app
+customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
 
 # initialize window
-root: Tk = Tk()
-root.geometry("310x200")
-root.configure(bg='black')
-root.resizable(0, 0)
-root.title("FrejSoftware - PyPassGen")
-root.iconbitmap('C:/Users/frejb/Desktop/PyPassGen/iconkey.ico')
+root = customtkinter.CTk()
+root.geometry("400x500")
+root.resizable(FALSE, FALSE)
+root.title("PyPassGen 1.0.0")
+root.iconbitmap(bitmap='iconkey.ico')
+
+# Frame for app
+frame = customtkinter.CTkFrame(master=root, corner_radius=20)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+
 
 # heading
-heading = Label(root, text='P A S S W O R D\nG E N E R A T O R', fg='green', bg='black',
-                font=("gothic", 15, "bold")).pack(side=TOP, pady=5)
+heading_label = customtkinter.CTkLabel(master=frame, text='PyPassGen Password Generator')
+heading_label.pack(pady=12, padx=10)
 
 # select password length
-pass_label = Label(root, text='PASSWORD LENGTH').pack(pady=5)
+pass_length_label = customtkinter.CTkLabel(master=frame, text='PASSWORD LENGTH')
+pass_length_label.pack(pady=12, padx=10)
+
 pass_len = IntVar()
-length = Spinbox(root, from_=8, to_=32, textvariable=pass_len, width=2).pack()
+pass_length_spinbox = Spinbox(master=frame, from_=8, to=32, textvariable=pass_len)
+pass_length_spinbox.pack(pady=12, padx=10)
 
 # define function
 pass_str = StringVar()
 
 
-def PassGen():
+def pass_gen():
     password = ''
     for x in range(0, 4):
         password = random.choice(string.ascii_uppercase) + random.choice(string.ascii_lowercase) + random.choice(
@@ -38,22 +52,31 @@ def PassGen():
 
 
 # button
-Button(root, text="GENERATE PASSWORD", command=PassGen).pack(pady=5)
-Entry(root, textvariable=pass_str, width=38).pack()
+generate_pass_button = customtkinter.CTkButton(master=frame, text="GENERATE PASSWORD", command=pass_gen)
+
+generate_pass_button.pack(pady=12, padx=10)
+
+pass_input = customtkinter.CTkEntry(master=frame,  textvariable=pass_str)
+pass_input.pack(pady=12, padx=10)
 
 
 # function to copy
-def Copy_pass():
+def copy_pass():
     pyperclip.copy(pass_str.get())
 
 
-Button(root, text='COPY TO CLIPBOARD', command=Copy_pass).pack(pady=5)
+copy_pass_btn = customtkinter.CTkButton(master=frame, text='COPY TO CLIPBOARD', command=copy_pass)
+
+copy_pass_btn.pack(pady=12, padx=10)
 
 
 # function to clear
-def Clear_pass():
-    pyperclip.determine_clipboard()
+def clear_pass():
+    pass_input.delete(0, 'end')
 
+
+clear_pass_btn = customtkinter.CTkButton(master=frame, text='CLEAR PASSWORD', command=clear_pass)
+clear_pass_btn.pack(pady=12, padx=10)
 
 # loop to run program
 root.mainloop()
