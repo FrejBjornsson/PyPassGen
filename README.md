@@ -1,5 +1,7 @@
 # PyPassGen🔑 
-Password Generator written in Python
+I wanted to learn some Python.. first thing i thought about was creating a password generator because it can be made really simple or really complex with many features (password vault, encrypting and so on). 
+
+#Versions (to keep track of progress)
 ## Version 0.0.0 (2020, prototype with tkinter)
 <p>
 <a href="https://github.com/FrejBjornsson/PyPassGen" target="_blank">
